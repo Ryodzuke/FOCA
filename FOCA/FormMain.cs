@@ -580,44 +580,32 @@ namespace FOCA
         /// <summary>
         /// Load search Gui.
         /// </summary>
-        /// <param name="strSearchString">searchstring</param>
+        /// <param name="searchString">searchstring</param>
         /// <param name="bInitialSearch">Initial search</param>
-        public void LoadSearchGui(string strSearchString, bool bInitialSearch)
+        public void LoadSearchGui(string searchString, bool bInitialSearch)
         {
-            panelMetadataSearch.Visible =
-            splitContainerMain.Visible = true;
             splitContainerMain.BringToFront();
+
             if (Program.data.Project.ProjectState == Project.ProjectStates.Uninitialized)
             {
                 panelMetadataSearch.panelCustomSearch.BorderStyle = BorderStyle.FixedSingle;
-                panelMetadataSearch.txtSearch.Visible = true;
                 panelMetadataSearch.linkLabelCustomSearch.Visible = false;
-                panelMetadataSearch.btnSearch.Visible = true;
                 panelMetadataSearch.btnSearchAll.Enabled = false;
-                panelMetadataSearch.lblExtensions.Visible = true;
-                panelMetadataSearch.checkedListBoxExtensions.Visible = true;
-                panelMetadataSearch.lblAll.Visible = false;
-                panelMetadataSearch.lblNone.Visible = false;
-
             }
             else
             {
                 panelMetadataSearch.btnSearchAll.Enabled = true;
-                panelMetadataSearch.lblExtensions.Visible =
-                panelMetadataSearch.checkedListBoxExtensions.Visible = true;
-
-                panelMetadataSearch.lblAll.Visible = true;
-                panelMetadataSearch.lblNone.Visible = true;
             }
+
             if (bInitialSearch)
             {
-                panelMetadataSearch.linkLabelCustomSearch.Visible = !string.IsNullOrEmpty(strSearchString);
+                panelMetadataSearch.linkLabelCustomSearch.Visible = !string.IsNullOrWhiteSpace(searchString);
                 panelMetadataSearch.txtSearch.Visible = !panelMetadataSearch.linkLabelCustomSearch.Visible;
                 panelMetadataSearch.btnSearch.Visible = !panelMetadataSearch.linkLabelCustomSearch.Visible;
                 panelMetadataSearch.panelCustomSearch.BorderStyle = BorderStyle.None;
             }
 
-            panelMetadataSearch.txtSearch.Text = strSearchString;
+            panelMetadataSearch.txtSearch.Text = searchString;
             panelMetadataSearch.BringToFront();
         }
 
